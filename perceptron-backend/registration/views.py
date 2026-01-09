@@ -4,6 +4,8 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import SpotRegistrationSerializer
+from django.http import JsonResponse
+
 
 @api_view(['POST'])
 @authentication_classes([BasicAuthentication])  # 🔥 disables CSRF
@@ -17,3 +19,10 @@ def spot_register(request):
             status=status.HTTP_201_CREATED
         )
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def home(request):
+    return JsonResponse({
+        "status": "ok",
+        "service": "Perceptron Spot Registration API"
+    })
